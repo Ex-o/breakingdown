@@ -1,0 +1,68 @@
+[
+
+
+
+
+{
+"title": "The Start",
+"tags": "",
+"keywords": "start",
+"url": "breakingdown_start",
+"summary": "How it all started!"
+}
+,
+
+
+
+{
+"title": "Contact Information",
+"tags": "",
+"keywords": "contact",
+"url": "contact",
+"summary": "Reach out to me if you have anything to say!"
+}
+,
+
+
+
+
+
+{
+"title": "CodeForces - Breaking Down",
+"tags": "",
+"keywords": "homepage",
+"url": "index.html",
+"summary": "This is a documentation for the few times I worked on improving Codeforces' security."
+}
+,
+
+
+
+{
+"title": "Scroll layout",
+"tags": "special_layouts",
+"keywords": "json, scrolling, scrollto, jquery plugin",
+"url": "jsmydoc_scroll.html",
+"summary": "This page demonstrates how you the integration of a script called ScrollTo, which is used here to link definitions of a JSON code sample to a list of definitions for that particular term. The scenario here is that the JSON blocks are really long, with extensive nesting and subnesting, which makes it difficult for tables below the JSON to adequately explain the term in a usable way."
+}
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]

