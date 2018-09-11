@@ -8,6 +8,18 @@
   
   
   <url>
+    <loc>http://localhost:4000/breakingdown_dig</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/breakingdown_fall</loc>
+  </url>
+  
+  
+  
+  <url>
     <loc>http://localhost:4000/breakingdown_start</loc>
   </url>
   
@@ -44,6 +56,12 @@
   
   
   
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/assets/css/style.css</loc>
+  </url>
   
   
 </urlset>

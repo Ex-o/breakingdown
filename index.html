@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +36,7 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<link rel="alternate" type="application/rss+xml" title="" href="http://localhost:4000/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="breakingdown" href="http://localhost:4000/feed.xml">
 
     <script>
         $(document).ready(function() {
@@ -70,11 +71,6 @@
 
     </script>
     <script>
-        $(document.links).filter(function() {
-    return this.hostname != window.location.hostname;
-        }).attr('target', '_blank');
-    </script>
-    <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
@@ -97,50 +93,17 @@
     <!-- First, this walks through the tables that occur between ...-begin
          and ...-end and add the "datatable" class to them.
          Then it invokes DataTable's standard initializer
-         Cpurpleit here: http://www.beardedhacker.com/blog/2015/08/28/add-class-attribute-to-markdown-table/
+         Credit here: http://www.beardedhacker.com/blog/2015/08/28/add-class-attribute-to-markdown-table/
       -->
-    <script>
-        var links = document.querySelectorAll( '.post-content a' );  
-        for (var i = 0, length = links.length; i < length; i++) {  
-            if (links[i].hostname != window.location.hostname) {
-                links[i].target = '_blank';
-            }
-        }
-    </script>  
     <script>
       $(document).ready(function(){
           $('div.datatable-begin').nextUntil('div.datatable-end', 'table').addClass('display');
           $('table.display').DataTable( {
               paging: true,
               stateSave: true,
-              searching: true,
-              aLengthMenu: [
-                 [10, 25, 50, 100, 200, -1],
-                 [10, 25, 50, 100, 200, "All"]
-                             ],
-              "orderClasses": false,
-              "createdRow": function( row, data, dataIndex ) {
-                 if (data[3] < 1200)
-                    $(row).addClass('grey');
-                else if (data[3] >= 1200 && data[3] < 1400)
-                    $(row).addClass('green');
-                else if (data[3] >= 1400 && data[3] < 1600)
-                    $(row).addClass('cyan');
-                else if (data[3] >= 1600 && data[3] < 1900)
-                   $(row).addClass('blue');
-                else if (data[3] >= 1900 && data[3] < 2200)
-                    $(row).addClass('purple');
-                else if (data[3] >= 2200 && data[3] < 2300)
-                    $(row).addClass('yellow');
-                else if (data[3] >= 2300 && data[3] < 2400)
-                    $(row).addClass('yellow');
-                else if (data[3] >= 2400 && data[3] < 2600)
-                    $(row).addClass('red');
-                else if (data[3] >= 2600 && data[3] < 2900)
-                    $(row).addClass('red');
-             }
+              searching: true
           });
-    });
+       });
     </script>
     
 
@@ -283,6 +246,13 @@
             
             
             
+            
+            
+            <li><a href="breakingdown_fall.html">The Fall</a></li>
+            
+            
+            
+            
         </ul>
      </li>
        
@@ -358,9 +328,6 @@ $('#toc').on('click', 'a', function() {
     </div>
 
 
-</div>
-
-
 
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -377,14 +344,16 @@ $('#toc').on('click', 'a', function() {
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
+</div>
+
 <hr class="shaded"/>
 
 <footer>
             <div class="row">
                 <div class="col-lg-12 footer">
                &copy;2018 Khaled Mohamed. All rights reserved. <br />
- Site last updated: Aug 25, 2018 <br />
-<p><!--img src="images/company_logo.png" alt="Company logo"/--></p>
+ Site last updated: Sep 11, 2018 <br />
+<p><img src="images/logo.png" alt="logo"/></p>
                 </div>
             </div>
 </footer>

